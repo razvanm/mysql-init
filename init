@@ -22,5 +22,5 @@ ${ROOT}/mysqld \
   --default-storage-engine=myisam \
   --datadir=${ROOT}/datadir \
   --tmpdir=${ROOT}/tmp/ \
-  --language=/usr/share/mysql/english \
+  --lc-messages-dir=/usr/share/mysql \
   --character-sets-dir=/usr/share/mysql/charsets
