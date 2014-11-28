@@ -13,5 +13,7 @@ ${ROOT}/mysqld \
   --character-sets-dir=/usr/share/mysql/charsets \
   --sock=${ROOT}/mysql.sock \
   --pid-file=${ROOT}/mysql.pid \
+  --innodb_log_file_size=128M \
+  --innodb_buffer_pool_size=2G \
   --innodb_file_per_table \
   --skip-networking
