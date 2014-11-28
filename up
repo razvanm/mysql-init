@@ -1,0 +1,17 @@
+#!/bin/bash
+
+ROOT=$(pwd)
+
+echo ">>>>>> Connect: mysql -u root -S ${ROOT}/mysql.sock"
+echo ">>>>>> Exit: press 'ctrl-\'"
+
+${ROOT}/mysqld \
+  --no-defaults \
+  --datadir=${ROOT}/datadir \
+  --tmpdir=${ROOT}/tmp/ \
+  --lc-messages-dir=/usr/share/mysql \
+  --character-sets-dir=/usr/share/mysql/charsets \
+  --sock=${ROOT}/mysql.sock \
+  --pid-file=${ROOT}/mysql.pid \
+  --innodb_file_per_table \
+  --skip-networking

@@ -1,0 +1,27 @@
+#!/bin/bash
+
+ROOT=$(pwd)
+
+if [[ -d ${ROOT}/datadir ]]
+then
+  echo $ROOT/datadir already exists. Nothing to do.
+  exit
+fi
+
+mkdir -p ${ROOT}/datadir/mysql ${ROOT}/tmp
+cp /usr/sbin/mysqld ${ROOT}
+
+echo Bootstrap...
+
+/usr/share/mysql/mysql_system_tables_data.sql
+/usr/share/mysql/mysql_system_tables.sql
+
+(echo 'use mysql;';
+ cat /usr/share/mysql/mysql_system_tables.sql;
+ cat /usr/share/mysql/mysql_system_tables_data.sql) |
+${ROOT}/mysqld \
+  --no-defaults --bootstrap \
+  --datadir=${ROOT}/datadir \
+  --tmpdir=${ROOT}/tmp/ \
+  --language=/usr/share/mysql/english \
+  --character-sets-dir=/usr/share/mysql/charsets
