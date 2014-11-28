@@ -13,14 +13,13 @@ cp /usr/sbin/mysqld ${ROOT}
 
 echo Bootstrap...
 
-/usr/share/mysql/mysql_system_tables_data.sql
-/usr/share/mysql/mysql_system_tables.sql
-
 (echo 'use mysql;';
  cat /usr/share/mysql/mysql_system_tables.sql;
  cat /usr/share/mysql/mysql_system_tables_data.sql) |
 ${ROOT}/mysqld \
   --no-defaults --bootstrap \
+  --loose-skip-innodb \
+  --default-storage-engine=myisam \
   --datadir=${ROOT}/datadir \
   --tmpdir=${ROOT}/tmp/ \
   --language=/usr/share/mysql/english \
